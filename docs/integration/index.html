@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Integration Into Existing Laravel Project | InfyChat</title>
+    <meta name="description"
+          content="InfyChat is to give an easy way for everyone can chat using web browser at an affordable price.">
+    <link rel="icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/circular-std-font-face.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <link rel="preload" href="../assets/css/0.styles.8d0793be.css" as="style">
+    <link rel="preload" href="../js/styles.js" as="script">
+    <link rel="preload" href="../js/1.js" as="script">
+    <link rel="preload" href="../js/2.js" as="script">
+    <link rel="preload" href="../js/9.js" as="script">
+    <link rel="prefetch" href="../js/10.js">
+    <link rel="prefetch" href="../js/11.js">
+    <link rel="prefetch" href="../js/12.js">
+    <link rel="prefetch" href="../js/3.js">
+    <link rel="prefetch" href="../js/4.js">
+    <link rel="prefetch" href="../js/5.js">
+    <link rel="prefetch" href="../js/6.js">
+    <link rel="prefetch" href="../js/7.js">
+    <link rel="prefetch" href="../js/8.js">
+    <link rel="stylesheet" href="../assets/css/0.styles.8d0793be.css">
+</head>
+<body>
+<div id="app" data-server-rendered="true">
+    <div class="theme-container">
+        <header class="navbar">
+            <div class="sidebar-button">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"
+                     class="icon">
+                    <path fill="currentColor"
+                          d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path>
+                </svg>
+            </div>
+            <a href="/" class="home-link router-link-active"><img src="../images/logo.png" alt="InfyChat" class="logo">
+                <span class="site-name can-hide">InfyChat</span></a>
+            <div class="links"><!---->
+                <nav class="nav-links can-hide">
+                    <div class="nav-item"><a href="../index.html" class="nav-link">Home</a></div>
+                    <div class="nav-item"><a href="../docs/index.html" class="nav-link">Docs</a></div>
+                    <div class="nav-item"><a href="../releases/index.html" class="nav-link ">Releases</a>
+                    </div>
+                    <div class="nav-item"><a href="../upgrade/index.html" class="nav-link">Upgrade Guide</a></div>
+                    <div class="nav-item"><a href="../integration/index.html" class="nav-link router-link-exact-active router-link-active">Standalone Integration</a></div> <!----></nav>
+            </div>
+        </header>
+        <div class="sidebar-mask"></div>
+        <aside class="sidebar">
+            <nav class="nav-links">
+                <div class="nav-item"><a href="../index.html" class="nav-link">Home</a></div>
+                <div class="nav-item"><a href="../docs/index.html" class="nav-link">Docs</a></div>
+                <div class="nav-item"><a href="../releases/index.html" class="nav-link">Releases</a>
+                </div>
+                <div class="nav-item"><a href="../upgrade/index.html" class="nav-link">Upgrade Guide</a></div>
+                <div class="nav-item"><a href="../integration/index.html" class="nav-link  router-link-exact-active router-link-active">Standalone Integration</a></div> <!----></nav>
+            <ul class="sidebar-links">
+                <li>
+                    <section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Integration Into Existing Laravel Project</span>
+                        <!----></p>
+                        <ul class="sidebar-links sidebar-group-items">
+                            <li><a href="#update-composer-json" class="sidebar-link">Update
+                                Composer.json</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#add-service-providers" class="sidebar-link">Add Service
+                                Providers</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#add-aliases" class="sidebar-link">Add Aliases</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-migration-files" class="sidebar-link">Copy Migration
+                                Files</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#add-routes-channels" class="sidebar-link">Add Routes /
+                                Channels</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-views" class="sidebar-link">Copy Views</a>
+                                <ul class="sidebar-sub-headers">
+                                    <li class="sidebar-sub-header"><a href="#copy-main-layouts"
+                                                                      class="sidebar-link">Copy Main Layouts</a></li>
+                                    <li class="sidebar-sub-header"><a
+                                            href="#copy-conversations-roles-users-views"
+                                            class="sidebar-link">Copy Conversations/Roles/Users Views</a></li>
+                                    <li class="sidebar-sub-header"><a
+                                            href="#copy-auth-landing-page-views-optional"
+                                            class="sidebar-link">Copy Auth / Landing Page Views (Optional)</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#copy-models" class="sidebar-link">Copy Models</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#change-configuration" class="sidebar-link">Change
+                                Configuration</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#add-new-config-files" class="sidebar-link">Add new config
+                                files</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-form-requests-and-jobs" class="sidebar-link">Copy Form
+                                Requests and Jobs</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-controllers" class="sidebar-link">Copy Controllers</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-middleware" class="sidebar-link">Copy Middleware</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-repositories-datatables-files-and-traits"
+                                   class="sidebar-link">Copy Repositories / DataTables Files and Traits</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-helpers" class="sidebar-link">Copy helpers</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#copy-assets" class="sidebar-link">Copy Assets</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#update-package-json" class="sidebar-link">Update Package.json</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#update-env-variables" class="sidebar-link">Update ENV
+                                variables</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#run-commands-cache-cleanup" class="sidebar-link">Run Commands
+                                (Cache Cleanup)</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                            <li><a href="#update-webpack-mix-js" class="sidebar-link">Update
+                                webpack.mix.js</a>
+                                <ul class="sidebar-sub-headers"></ul>
+                            </li>
+                        </ul>
+                    </section>
+                </li>
+            </ul>
+        </aside>
+        <main class="page">
+            <div class="theme-default-content content__default"><h1 id="integration-into-existing-laravel-project"><a
+                    href="#integration-into-existing-laravel-project" class="header-anchor">#</a> Integration Into
+                Existing Laravel Project</h1>
+                <p>This guide will be helpful when you want to integrate InfyChat into your existing projects.</p>
+                <p>Here we have tried our best to provide simple steps that help you to integrate InfyChat into your
+                    existing Laravel Project.</p>
+                <p><strong>NOTE:: While copying/replacing files from InfyChat, make sure you have a backup of your
+                    files.
+                    Your changes may be removed while replacing files. Also copy files at the same path from where you
+                    copied from.</strong></p>
+                <h2 id="update-composer-json"><a href="#update-composer-json" class="header-anchor">#</a> Update
+                    Composer.json</h2>
+                <p>Add the following packages to your composer.json in the <code>require</code> section.</p>
+                <pre><code>&quot;berkayk/onesignal-laravel&quot;:&quot;^1.0&quot;,
+&quot;embed/embed&quot;:&quot;^3.4&quot;,
+&quot;guzzlehttp/guzzle&quot;: &quot;^6.5&quot;,
+&quot;infyomlabs/coreui-templates&quot;: &quot;6.0.x-dev&quot;,
+&quot;infyomlabs/laravel-generator&quot;: &quot;6.0.x-dev&quot;,
+&quot;intervention/image&quot;: &quot;^2.5&quot;,
+&quot;laminas/laminas-diactoros&quot;: &quot;^2.2&quot;,
+&quot;laravel/socialite&quot;: &quot;^4.3&quot;,
+&quot;laravelcollective/html&quot;: &quot;^6.0&quot;,
+&quot;league/flysystem-aws-s3-v3&quot;: &quot;^1.0&quot;,
+&quot;pusher/pusher-php-server&quot;: &quot;~4.0&quot;,
+&quot;spatie/laravel-permission&quot;: &quot;^3.2&quot;,
+&quot;yajra/laravel-datatables-oracle&quot;: &quot;~9.0&quot;,
+&quot;laravel/passport&quot;: &quot;^7.5&quot;
+</code></pre>
+                <p>Add the following packages to your composer.json in the <code>require-dev</code> section.</p>
+                <pre><code> barryvdh/laravel-ide-helper&quot;: &quot;^2.6&quot;
+</code></pre>
+                <p><strong>Note:: Ignore packages that you already have into your composer.json.
+                    But make sure the package version you have is compatible with the version that InfyChat
+                    has.</strong></p>
+                <p>Run below command after adding all the above packages.</p>
+                <pre><code>composer update 
+</code></pre>
+                <h2 id="add-service-providers"><a href="#add-service-providers" class="header-anchor">#</a> Add Service
+                    Providers</h2>
+                <p>Add the following service providers to <code>config/app.php</code></p>
+                <pre><code>Laravel\Socialite\SocialiteServiceProvider::class,
+Berkayk\OneSignal\OneSignalServiceProvider::class,
+Collective\Html\HtmlServiceProvider::class,
+Laracasts\Flash\FlashServiceProvider::class,
+\InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
+\InfyOm\CoreUITemplates\CoreUITemplatesServiceProvider::class,
+Yajra\DataTables\DataTablesServiceProvider::class,
+Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+</code></pre>
+                <h2 id="add-aliases"><a href="#add-aliases" class="header-anchor">#</a> Add Aliases</h2>
+                <p>Add the following aliases to <code>config/app.php</code></p>
+                <pre><code>'Form'         =&gt; Collective\Html\FormFacade::class,
+'Html'         =&gt; Collective\Html\HtmlFacade::class,
+'Flash'        =&gt; Laracasts\Flash\Flash::class,
+'DataTables'   =&gt; Yajra\DataTables\Facades\DataTables::class,
+'Image'        =&gt; Intervention\Image\Facades\Image::class,
+'Socialite'    =&gt; \Laravel\Socialite\Facades\Socialite::class,
+'OneSignal'  =&gt; Berkayk\OneSignal\OneSignalFacade::class,
+</code></pre>
+                <p>Now run below optional command to generate proper docs and references. (Optional)</p>
+                <pre><code>php artisan ide-helper:generate
+</code></pre>
+                <p>Uncomment <code>App\Providers\BroadcastServiceProvider::class</code>, from
+                    <code>config/app.php</code></p>
+                <h2 id="copy-migration-files"><a href="#copy-migration-files" class="header-anchor">#</a> Copy Migration
+                    Files</h2>
+                <p>Copy all migrations from <code>database/migrations/</code>.</p>
+                <p><strong>Note:: You may already have migrations for <code>users</code>, <code>failed_jobs</code> and
+                    <code>password_reset</code> tables.
+                    You need to do it carefully, so either replace full migration or insert missing fields.</strong></p>
+                <p>Then Run:</p>
+                <pre><code>php artisan migrate
+</code></pre>
+                <h2 id="add-routes-channels"><a href="#add-routes-channels" class="header-anchor">#</a> Add Routes /
+                    Channels</h2>
+                <ul>
+                    <li><p>Add routes from <code>routes/web.php</code> to your routes file</p></li>
+                    <li><p>Add channels from <code>routes/channels.php</code> to your channels.php</p></li>
+                </ul>
+                <p><strong>Note:: While adding these routes, make sure you don't add duplicate routes which already
+                    exist in your routes file.</strong></p>
+                <h2 id="copy-views"><a href="#copy-views" class="header-anchor">#</a> Copy Views</h2>
+                <h3 id="copy-main-layouts"><a href="#copy-main-layouts" class="header-anchor">#</a> Copy Main Layouts
+                </h3>
+                <p>Copy main layouts from <code>resources/layouts/</code> copy all files from the <code>layouts</code>
+                    folder and add/replace it into your project on the same path.</p>
+                <h3 id="copy-conversations-roles-users-views"><a href="#copy-conversations-roles-users-views"
+                                                                 class="header-anchor">#</a> Copy
+                    Conversations/Roles/Users Views</h3>
+                <p>Copy following views to your resources/views folder</p>
+                <pre><code>- resources/views/chat
+- resources/views/users
+- resources/views/role
+- resources/views/partials
+- resources/views/profile.blade.php
+</code></pre>
+                <h3 id="copy-auth-landing-page-views-optional"><a href="#copy-auth-landing-page-views-optional"
+                                                                  class="header-anchor">#</a> Copy Auth / Landing Page
+                    Views (Optional)</h3>
+                <ul>
+                    <li><p>Copy auth views from <code>resources/views/auth/</code> if you want to overwrite your
+                        existing auth screens</p></li>
+                    <li><p>Copy Home view from <code>resources/views/home/</code> if you want to overwrite landing page
+                        view</p></li>
+                </ul>
+                <h2 id="copy-models"><a href="#copy-models" class="header-anchor">#</a> Copy Models</h2>
+                <p>You have to create the <code>Models</code> folder into <code>app</code> if not exist and copy all
+                    models from <code>app\Models</code></p>
+                <p><strong>NOTE:: We moved the <code>User.php</code> model to <code>App\Models\User</code>. So you need
+                    to change your <code>auth.php</code>.
+                    Or if you have your existing <code>User.php</code> then you need to make changes accordingly
+                    everywhere in code.</strong></p>
+                <h2 id="change-configuration"><a href="#change-configuration" class="header-anchor">#</a> Change
+                    Configuration</h2>
+                <p>You need to change database mode from <code>config/database.php</code></p>
+                <p>Change your connection mode (mysql) from <code>strict =&gt; true</code> to <code>strict =&gt;
+                    false</code></p>
+                <pre><code>    'strict' =&gt; false,        
+</code></pre>
+                <p>As we are using the <code>App\Models\User</code> model you need to change into
+                    <code>config/auth.php</code>.</p>
+                <p>There is a <code>provider</code> section where you need to change user model namespace. Like the
+                    below example.</p>
+                <pre><code>'providers' =&gt; [
+        'users' =&gt; [
+            'driver' =&gt; 'eloquent',
+            'model' =&gt; \App\Models\User::class,
+        ],
+</code></pre>
+                <h2 id="add-new-config-files"><a href="#add-new-config-files" class="header-anchor">#</a> Add new config
+                    files</h2>
+                <ul>
+                    <li><code>config/configurable.php</code></li>
+                    <li><code>config/onesignal.php</code></li>
+                    <li><code>config/permission.php</code></li>
+                    <li><code>config/telescope.php</code></li>
+                </ul>
+                <h2 id="copy-form-requests-and-jobs"><a href="#copy-form-requests-and-jobs" class="header-anchor">#</a>
+                    Copy Form Requests and Jobs</h2>
+                <ul>
+                    <li>Copy <code>app/Http/Requests</code> folder into your project.</li>
+                    <li>Create <code>Jobs</code> folder into <code>app</code> and copy <code>app\Jobs</code> folder from
+                        InfyChat.
+                    </li>
+                    <li>Create <code>Mail</code> folder into <code>app</code> and copy <code>app/Mail</code> folder from
+                        InfyChat.
+                    </li>
+                    <li>Create <code>Events</code> folder <code>app</code> and copy <code>app\Events</code> folder from
+                        InfyChat.
+                    </li>
+                </ul>
+                <h2 id="copy-controllers"><a href="#copy-controllers" class="header-anchor">#</a> Copy Controllers</h2>
+                <p>Copy all controllers from <code>app/Http/Controllers</code>. It may overwrite your auth controllers
+                    too.
+                    So make sure your existing code isn't removed.</p>
+                <h2 id="copy-middleware"><a href="#copy-middleware" class="header-anchor">#</a> Copy Middleware</h2>
+                <ul>
+                    <li>Copy <code>App\Http\Middleware\SendMessage</code></li>
+                    <li>Copy <code>App\Http\Middleware\CheckUserIsActivated</code></li>
+                </ul>
+                <p>Put the following codes into <code>app\Http\kernel.php</code>. There is a property <code>$middlewareGroups</code>.
+                    Put the below code into it.</p>
+                <pre><code>'user.activated'     =&gt; CheckUserIsActivated::class,
+'role'               =&gt; \Spatie\Permission\Middlewares\RoleMiddleware::class,
+'permission'         =&gt; \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+'role_or_permission' =&gt; \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+'sendMessage'        =&gt; SendMessage::class,
+</code></pre>
+                <p>Copy <code>app/Console/ApiOperationFailedException</code></p>
+                <h2 id="copy-repositories-datatables-files-and-traits"><a
+                        href="#copy-repositories-datatables-files-and-traits" class="header-anchor">#</a> Copy
+                    Repositories / DataTables Files and Traits</h2>
+                <ul>
+                    <li>Copy Repositories from <code>App\Repositories\</code></li>
+                    <li>Copy <code>Queries</code> (Datatable Files) from <code>App\Querie\</code></li>
+                    <li>Copy Rules from <code>App\Rules</code></li>
+                    <li>Copy Image Trait from <code>App\Traits\</code></li>
+                </ul>
+                <h2 id="copy-helpers"><a href="#copy-helpers" class="header-anchor">#</a> Copy helpers</h2>
+                <p>Copy <code>app\helpers.php</code> file and put a reference of it into <code>composer.json</code></p>
+                <p>Add the following into <code>composer.json</code> autoload section</p>
+                <pre><code>&quot;autoload&quot;: {
+    &quot;files&quot;: [&quot;app/helpers.php&quot;],
+}
+</code></pre>
+                <p>Then run the below command:</p>
+                <pre><code>composer dump-autoload -o
+</code></pre>
+                <h2 id="copy-assets"><a href="#copy-assets" class="header-anchor">#</a> Copy Assets</h2>
+                <ul>
+                    <li>Copy assets folder from <code>resources\assets</code></li>
+                    <li>Copy language file from <code>resources/lang</code></li>
+                    <li>Copy <code>public/css</code></li>
+                    <li>Copy <code>public/js</code></li>
+                    <li>Copy <code>public/uploads</code></li>
+                    <li>Copy <code>public/OneSignal.js</code></li>
+                    <li>Copy <code>App\Exception\handler.php</code></li>
+                </ul>
+                <h2 id="update-package-json"><a href="#update-package-json" class="header-anchor">#</a> Update
+                    Package.json</h2>
+                <p>Add the following devDependency into your package.json</p>
+                <pre><code>&quot;devDependencies&quot;: {
+    &quot;@babel/plugin-transform-modules-commonjs&quot;: &quot;^7.9.0&quot;,
+    &quot;@babel/plugin-transform-strict-mode&quot;: &quot;^7.8.3&quot;,
+    &quot;axios&quot;: &quot;^0.19.2&quot;,
+    &quot;cross-env&quot;: &quot;^5.2.1&quot;,
+    &quot;laravel-mix&quot;: &quot;^4.0.7&quot;,
+    &quot;lodash&quot;: &quot;^4.17.13&quot;,
+    &quot;resolve-url-loader&quot;: &quot;^2.3.1&quot;,
+    &quot;sass&quot;: &quot;^1.26.3&quot;,
+    &quot;sass-loader&quot;: &quot;^7.1.0&quot;,
+    &quot;vue-template-compiler&quot;: &quot;^2.6.11&quot;
+},   
+</code></pre>
+                <p>Add the following dependency into your package.json</p>
+                <pre><code>&quot;dependencies&quot;: {
+    &quot;@coreui/coreui&quot;: &quot;^2.1.16&quot;,
+    &quot;@coreui/icons&quot;: &quot;^0.3.0&quot;,
+    &quot;bad-words&quot;: &quot;^3.0.3&quot;,
+    &quot;bootstrap&quot;: &quot;^4.4.1&quot;,
+    &quot;emojionearea&quot;: &quot;^3.4.1&quot;,
+    &quot;font-awesome&quot;: &quot;^4.7.0&quot;,
+    &quot;icheck&quot;: &quot;^1.0.2&quot;,
+    &quot;jquery&quot;: &quot;^3.4.1&quot;,
+    &quot;jquery-toast-plugin&quot;: &quot;^1.3.2&quot;,
+    &quot;laravel-echo&quot;: &quot;^1.5.4&quot;,
+    &quot;perfect-scrollbar&quot;: &quot;^1.5.0&quot;,
+    &quot;popper.js&quot;: &quot;^1.16.1&quot;,
+    &quot;pusher-js&quot;: &quot;^5.1.1&quot;,
+    &quot;simple-line-icons&quot;: &quot;^2.4.1&quot;,
+    &quot;sweetalert2&quot;: &quot;^9.10.6&quot;,
+    &quot;video.js&quot;: &quot;^7.7.5&quot;
+}
+</code></pre>
+                <p>Now delete your package-lock.json and run below command:</p>
+                <pre><code>npm install
+</code></pre>
+                <h2 id="update-env-variables"><a href="#update-env-variables" class="header-anchor">#</a> Update ENV
+                    variables</h2>
+                <p>You can find env variable changes docs <a href="/docs/#_1-setup-environment-env-file">here</a></p>
+                <h2 id="run-commands-cache-cleanup"><a href="#run-commands-cache-cleanup" class="header-anchor">#</a>
+                    Run Commands (Cache Cleanup)</h2>
+                <p>While copying these files, you are may be unable to see changes or facing some style issues.</p>
+                <p>Please run the following command when you have completed all steps:</p>
+                <pre><code>php artisan view:clear
+
+php artisan route:clear
+
+php artiasn config:cache
+</code></pre>
+                <h2 id="update-webpack-mix-js"><a href="#update-webpack-mix-js" class="header-anchor">#</a> Update
+                    webpack.mix.js</h2>
+                <p>copy <code>webpack.mix.js</code> file, and run the final command to make build.</p>
+                <pre><code>npm run dev
+</code></pre>
+                <p>And it should be ready to Go, Enjoy!</p></div>
+            <footer class="page-edit"><!----> <!----></footer> <!----> </main>
+    </div>
+    <div class="global-ui"></div>
+</div>
+<script src="../js/styles.js" defer></script>
+<script src="../js/2.js" defer></script>
+<script src="../js/9.js" defer></script>
+</body>
+</html>
